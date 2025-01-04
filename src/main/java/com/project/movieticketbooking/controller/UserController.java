@@ -16,6 +16,8 @@ import com.project.movieticketbooking.entity.User;
 import com.project.movieticketbooking.service.UserService;
 import com.project.movieticketbooking.util.ResponseStructure;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -24,26 +26,31 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping
+	@Operation(summary = "Save User Details")
 	public ResponseEntity<ResponseStructure<User>> saveUser(@RequestBody User User) {
 		return userService.saveUser(User);
 	}
 
 	@GetMapping
-	public ResponseEntity<ResponseStructure<UserDto>> findBookigById(@RequestParam int id) {
+	@Operation(summary = "Find User Details")
+	public ResponseEntity<ResponseStructure<UserDto>> findUserById(@RequestParam int id) {
 		return userService.findUserById(id);
 	}
 
 	@GetMapping("findAllUser")
+	@Operation(summary = "Find All User Details")
 	public ResponseEntity<ResponseStructure<List<User>>> findAllUser() {
 		return userService.findAllUser();
 	}
 
 	@PutMapping
+	@Operation(summary = "Update User Details")
 	public ResponseEntity<ResponseStructure<User>> updateUser(@RequestBody User User, @RequestParam int id) {
 		return userService.updateUser(User, id);
 	}
 
 	@DeleteMapping
+	@Operation(summary = "Delete User Details")
 	public ResponseEntity<ResponseStructure<User>> deleteUser(@RequestParam int id) {
 		return userService.deleteUser(id);
 	}

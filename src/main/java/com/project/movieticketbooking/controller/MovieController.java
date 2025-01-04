@@ -17,34 +17,41 @@ import com.project.movieticketbooking.entity.Movie;
 import com.project.movieticketbooking.service.MovieService;
 import com.project.movieticketbooking.util.ResponseStructure;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
-@RequestMapping("Movie")
+@RequestMapping("movie")
 public class MovieController {
 
 	@Autowired
 	MovieService movieService;
 
 	@PostMapping
+	@Operation(summary = "Save Movie Details")
 	public ResponseEntity<ResponseStructure<Movie>> saveMovie(@RequestBody Movie movie) {
 		return movieService.saveMovie(movie);
 	}
 
 	@GetMapping
-	public ResponseEntity<ResponseStructure<Movie>> findBookigById(@RequestParam int id) {
+	@Operation(summary = "Find Movie By Id")
+	public ResponseEntity<ResponseStructure<Movie>> findMovieById(@RequestParam int id) {
 		return movieService.findMovieById(id);
 	}
 
 	@GetMapping("findAllMovie")
+	@Operation(summary = "Find All Movie Details")
 	public ResponseEntity<ResponseStructure<List<Movie>>> findAllMovie() {
 		return movieService.findAllMovie();
 	}
 
 	@PutMapping
+	@Operation(summary = "Update Movie Details")
 	public ResponseEntity<ResponseStructure<Movie>> updateMovie(@RequestBody Movie Movie, @RequestParam int id) {
 		return movieService.updateMovie(Movie, id);
 	}
 
 	@DeleteMapping
+	@Operation(summary = "Delete Movie Details")
 	public ResponseEntity<ResponseStructure<Movie>> deleteMovie(@RequestParam int id) {
 		return movieService.deleteMovie(id);
 	}

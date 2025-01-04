@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.project.movieticketbooking.dao.TicketDao;
 import com.project.movieticketbooking.entity.Ticket;
+import com.project.movieticketbooking.exception.ListOfTicketNotFoundException;
 import com.project.movieticketbooking.exception.TicketNotFoundException;
 import com.project.movieticketbooking.util.ResponseStructure;
 
@@ -49,7 +50,8 @@ public class TicketService {
 			structure.setStatusCode(HttpStatus.FOUND.value());
 			return new ResponseEntity<ResponseStructure<List<Ticket>>>(structure, HttpStatus.FOUND);
 		}
-		return null; // exception will be there if list of Ticket is empty
+		throw new ListOfTicketNotFoundException("**No Ticket Found**"); // exception will be there if list of Ticket is
+																		// empty
 	}
 
 //	4.update
@@ -63,7 +65,7 @@ public class TicketService {
 			structure.setStatusCode(HttpStatus.OK.value());
 			return new ResponseEntity<ResponseStructure<Ticket>>(structure, HttpStatus.OK);
 		}
-		return null; // exception will be there if object is not present
+		throw new TicketNotFoundException("Ticket Not Found"); // exception will be there if object is not present
 
 	}
 
@@ -77,7 +79,7 @@ public class TicketService {
 			structure.setStatusCode(HttpStatus.OK.value());
 			return new ResponseEntity<ResponseStructure<Ticket>>(structure, HttpStatus.OK);
 		}
-		return null; // exception will be there if object is not present
+		throw new TicketNotFoundException("Ticket Not Found"); // exception will be there if object is not present
 	}
 
 }

@@ -19,7 +19,16 @@ public class AdminDao {
 
 //	1.save
 	public Admin saveAdmin(Admin Admin) {
-		return AdminRepository.save(Admin);
+		List<Admin> list = findAllAdmin();
+
+		for (Admin admin : list) {
+			if (admin.getAdminEmail().equals(Admin.getAdminEmail())) {
+				return null;
+			}
+		}
+		AdminRepository.save(Admin);
+		return Admin;
+
 	}
 
 //	2.findById
@@ -57,4 +66,23 @@ public class AdminDao {
 		return null; // exception will be there for object is not present
 	}
 
+//	6.find Admin by email
+	public List<Admin> findByAdminEmail(String adminEmail) {
+		List<Admin> admin = AdminRepository.findByadminEmail(adminEmail);
+
+		return admin;
+	}
+
+//	7.admin login validation for email and password
+	public Admin adminLogin(String adminEmail, String adminPassword) {
+		List<Admin> foundedAdmin = findByAdminEmail(adminEmail);
+		if (foundedAdmin.size() > 1) {
+			return null;
+		} else if (foundedAdmin.get(0).getAdminPassword().equals(adminPassword)) {
+			return foundedAdmin.get(0);
+		} else {
+			return null;
+		}
+
+	}
 }

@@ -16,6 +16,8 @@ import com.project.movieticketbooking.entity.Admin;
 import com.project.movieticketbooking.service.AdminService;
 import com.project.movieticketbooking.util.ResponseStructure;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("admin")
 public class AdminController {
@@ -24,27 +26,45 @@ public class AdminController {
 	AdminService adminService;
 
 	@PostMapping
+	@Operation(summary = "Save Admin Details")
 	public ResponseEntity<ResponseStructure<Admin>> saveOwner(@RequestBody Admin admin) {
 		return adminService.saveAdmin(admin);
 	}
 
 	@GetMapping
+	@Operation(summary = "Find Admin Detail's By AdminId")
 	public ResponseEntity<ResponseStructure<AdminDto>> findBookigById(@RequestParam int id) {
 		return adminService.findAdminById(id);
 	}
 
 	@GetMapping("findAllAdmin")
+	@Operation(summary = "Find All Admin Details")
 	public ResponseEntity<ResponseStructure<List<Admin>>> findAllOwner() {
 		return adminService.findAllAdmin();
 	}
 
 	@PutMapping
+	@Operation(summary = "Update Admin Details")
 	public ResponseEntity<ResponseStructure<Admin>> updateOwner(@RequestBody Admin admin, @RequestParam int id) {
 		return adminService.updateAdmin(admin, id);
 	}
 
 	@DeleteMapping
+	@Operation(summary = "Delete Admin Details")
 	public ResponseEntity<ResponseStructure<Admin>> deleteOwner(@RequestParam int id) {
 		return adminService.deleteAdmin(id);
+	}
+
+	@GetMapping("findByEmail")
+	@Operation(summary = "Find Admin Details By Email")
+	public ResponseEntity<ResponseStructure<Admin>> adminLogin(@RequestParam String adminEmail) {
+		return adminService.findByAdminEamil(adminEmail);
+	}
+
+	@GetMapping("adminLogin")
+	@Operation(summary = "Try To Login With Your Email And Password")
+	public ResponseEntity<ResponseStructure<Admin>> adminLogin(@RequestParam String adminEmail,
+			@RequestParam String adminPassword) {
+		return adminService.adminLogin(adminEmail, adminPassword);
 	}
 }

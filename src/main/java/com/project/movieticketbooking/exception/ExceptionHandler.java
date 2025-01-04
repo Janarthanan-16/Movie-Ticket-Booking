@@ -81,9 +81,9 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
 //	5.Admin Exception Handling
 	@org.springframework.web.bind.annotation.ExceptionHandler
-	public ResponseEntity<ResponseStructure<String>> handleOwnerNotFoundException(AdminNotFoundException exception) {
+	public ResponseEntity<ResponseStructure<String>> handleAdminNotFoundException(AdminNotFoundException exception) {
 		ResponseStructure<String> structure = new ResponseStructure<>();
-		structure.setData("Owner Details Not Found");
+		structure.setData("Admin Details Not Found");
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		structure.setMessage(exception.getMessage());
 
@@ -91,10 +91,21 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@org.springframework.web.bind.annotation.ExceptionHandler
-	public ResponseEntity<ResponseStructure<String>> handleListOfOwnerNotFoundException(
+	public ResponseEntity<ResponseStructure<String>> handleListOfAdminNotFoundException(
 			ListOfAdminNotFoundException exception) {
 		ResponseStructure<String> structure = new ResponseStructure<>();
-		structure.setData("Owner's Details Not Found");
+		structure.setData("Admin's Details Not Found");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		structure.setMessage(exception.getMessage());
+
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handleAdminEmailDuplicateException(
+			AdminEmailDuplicateException exception) {
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setData("Admin Details Not Found Because Email Duplicated");
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		structure.setMessage(exception.getMessage());
 
@@ -139,6 +150,18 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 			ListOfSeatNotFoundException exception) {
 		ResponseStructure<String> structure = new ResponseStructure<>();
 		structure.setData("Seat's Details Not Found");
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		structure.setMessage(exception.getMessage());
+
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+	}
+
+//	8.Ticket Exception handling
+	@org.springframework.web.bind.annotation.ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handleListOfTicketNotFoundException(
+			ListOfTicketNotFoundException exception) {
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setData("Ticket's Details Not Found");
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		structure.setMessage(exception.getMessage());
 

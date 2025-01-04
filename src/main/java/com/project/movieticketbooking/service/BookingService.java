@@ -40,7 +40,7 @@ public class BookingService {
 			structure.setStatusCode(HttpStatus.FOUND.value());
 			return new ResponseEntity<ResponseStructure<Booking>>(structure, HttpStatus.FOUND);
 		}
-		throw new BookingNotFoundException("For The Given Id Booking Details Not Found or Booking Id is Invalid");
+		throw new BookingNotFoundException("***For The Given Id Booking Details Not Found or Booking Id is Invalid***");
 	}
 
 //	3.Find All
@@ -54,7 +54,7 @@ public class BookingService {
 			structure.setStatusCode(HttpStatus.FOUND.value());
 			return new ResponseEntity<ResponseStructure<List<Booking>>>(structure, HttpStatus.NOT_FOUND);
 		}
-		throw new ListOfBookingNotFoundException("No Booking Details Found it Should Be Empty"); // exception will be
+		throw new ListOfBookingNotFoundException("***No Booking Details Found it Should Be Empty***"); // exception will be
 																									// there if list
 		// of Booking object is null
 	}
@@ -70,7 +70,7 @@ public class BookingService {
 			structure.setStatusCode(HttpStatus.OK.value());
 			return new ResponseEntity<ResponseStructure<Booking>>(structure, HttpStatus.OK);
 		}
-		throw new BookingUpdateCannotDone("For The Given Id Data Not Present or else Booking Details Not Retrieved"); // exception
+		throw new BookingUpdateCannotDone("***For The Given Id Data Not Present or else Booking Details Not Retrieved***"); // exception
 																														// will
 																														// be
 																														// there

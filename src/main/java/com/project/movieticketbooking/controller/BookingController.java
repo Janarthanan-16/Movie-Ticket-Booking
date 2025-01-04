@@ -20,7 +20,7 @@ import com.project.movieticketbooking.util.ResponseStructure;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("Booking")
+@RequestMapping("booking")
 public class BookingController {
 
 	@Autowired

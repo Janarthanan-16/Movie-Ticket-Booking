@@ -1,12 +1,12 @@
 package com.project.movieticketbooking.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.project.movieticketbooking.dao.TheatreDao;
+import com.project.movieticketbooking.entity.Screen;
 import com.project.movieticketbooking.entity.Theatre;
 import com.project.movieticketbooking.exception.ListOfTheatreNotFoundException;
 import com.project.movieticketbooking.exception.TheatreNotFoundException;
@@ -21,13 +21,17 @@ public class TheatreService {
 //	1.save
 	public ResponseEntity<ResponseStructure<Theatre>> saveTheatre(Theatre Theatre) {
 		ResponseStructure<Theatre> structure = new ResponseStructure<>();
+		for (Screen screen : Theatre.getScreen()) {
+			screen.setTheatre(Theatre);
+		}
+
 		structure.setData(theatreDao.saveTheatre(Theatre));
 		structure.setMessage("Theatre saved successfull");
 		structure.setStatusCode(HttpStatus.CREATED.value());
 		return new ResponseEntity<ResponseStructure<Theatre>>(structure, HttpStatus.CREATED);
 	}
 
-	// 2.findTheatreById
+// 2.findTheatreById
 	public ResponseEntity<ResponseStructure<Theatre>> findTheatreById(int id) {
 		Theatre foundedTheatre = theatreDao.findTheatreById(id);
 		if (foundedTheatre != null) {
@@ -41,7 +45,7 @@ public class TheatreService {
 																				// TheatreNotFoundException
 	}
 
-	// 3.findAll
+// 3.findAll
 	public ResponseEntity<ResponseStructure<List<Theatre>>> findAllTheatre() {
 		List<Theatre> Theatre = theatreDao.findAllTheatre();
 		if (Theatre != null) {

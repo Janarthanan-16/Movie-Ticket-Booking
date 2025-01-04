@@ -17,34 +17,41 @@ import com.project.movieticketbooking.entity.Theatre;
 import com.project.movieticketbooking.service.TheatreService;
 import com.project.movieticketbooking.util.ResponseStructure;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
-@RequestMapping("Theatre")
+@RequestMapping("theatre")
 public class TheatreController {
 	@Autowired
 	TheatreService theatreService;
 
 	@PostMapping
+	@Operation(summary = "Save Theatre Detailss")
 	public ResponseEntity<ResponseStructure<Theatre>> saveTheatre(@RequestBody Theatre Theatre) {
 		return theatreService.saveTheatre(Theatre);
 	}
 
 	@GetMapping
-	public ResponseEntity<ResponseStructure<Theatre>> findBookigById(@RequestParam int id) {
+	@Operation(summary = "Find Theatre Details By Id")
+	public ResponseEntity<ResponseStructure<Theatre>> findTheatreById(@RequestParam int id) {
 		return theatreService.findTheatreById(id);
 	}
 
 	@GetMapping("findAllTheatre")
+	@Operation(summary = "Find All Theatre Details")
 	public ResponseEntity<ResponseStructure<List<Theatre>>> findAllTheatre() {
 		return theatreService.findAllTheatre();
 	}
 
 	@PutMapping
+	@Operation(summary = "Update Theatre Details")
 	public ResponseEntity<ResponseStructure<Theatre>> updateTheatre(@RequestBody Theatre Theatre,
 			@RequestParam int id) {
 		return theatreService.updateTheatre(Theatre, id);
 	}
 
 	@DeleteMapping
+	@Operation(summary = "Delete Theatre Details")
 	public ResponseEntity<ResponseStructure<Theatre>> deleteTheatre(@RequestParam int id) {
 		return theatreService.deleteTheatre(id);
 	}
