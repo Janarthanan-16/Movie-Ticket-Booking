@@ -18,7 +18,7 @@ public class CorsConfig {
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.addAllowedOrigin("http://localhost:5174");
+		config.addAllowedOrigin("http://localhost:5173");
 		config.addAllowedMethod("*");
 		config.addAllowedHeader("*");
 		config.setAllowCredentials(true);
@@ -29,6 +29,7 @@ public class CorsConfig {
 
 	}
 
+	@Bean
 	public OpenAPI swaggerDocApi() {
 
 		Server server1 = new Server();

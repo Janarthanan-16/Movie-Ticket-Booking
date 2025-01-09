@@ -20,7 +20,7 @@ public class Theatre {
 	private String theatreName;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Location location;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
 	private List<Screen> screen;
 
 }

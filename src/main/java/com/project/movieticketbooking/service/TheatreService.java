@@ -20,6 +20,9 @@ public class TheatreService {
 
 //	1.save
 	public ResponseEntity<ResponseStructure<Theatre>> saveTheatre(Theatre Theatre) {
+		
+		System.out.println(Theatre);
+		
 		ResponseStructure<Theatre> structure = new ResponseStructure<>();
 		for (Screen screen : Theatre.getScreen()) {
 			screen.setTheatre(Theatre);
